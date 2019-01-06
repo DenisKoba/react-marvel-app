@@ -1,9 +1,24 @@
 import React, { Component } from 'react'
 import ComicsComponent from '../CharactersComponent/CharactersComponent'
-import axios from 'axios/index'
+import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions';
+import charApi from '../api/characters-api'
 
-const KEY = 'ee36a79dfdfc1141f1ea1a48d75f9d39'
-const BASE_URL = 'https://gateway.marvel.com'
+const mapStateToProps = state => {
+  return {
+    char: state.characters
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    requestCharacters: (name, age) => {
+      charApi.getCharacters().then((data) => {
+        dispatch({type: actionTypes.GET_CHARACTERS, data: data.data.results})
+      })
+    },
+  }
+};
 
 class CharactersList extends Component {
   state = {
@@ -11,20 +26,18 @@ class CharactersList extends Component {
   }
 
   componentDidMount() {
-      axios.get(`${BASE_URL}/v1/public/characters?limit=50&apikey=${KEY}`).then((data) => {
-        this.setState({ comicsData: data.data.data.results })
-      }).catch(function (error) {
-        console.log(error);
-      })
+    this.props.requestCharacters()
   }
+
   render() {
-    const characters = this.state.comicsData.map(character => {
-      return <ComicsComponent data={character}/>
-    })
-    return (
-      <div className="characters-container">{characters}</div>
-    );
+    const characters = () => {
+      return this.props.characters.map(character => {
+        return <ComicsComponent data={character}/>
+      })
+    }
+
+    return this.props.characters ? <div className="characters-container">{ characters }</div> : 'loding'
   }
 }
 
-export default CharactersList;
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersList);
