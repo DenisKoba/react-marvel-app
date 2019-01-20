@@ -11,14 +11,14 @@ const requestProps = {
 
 const mapStateToProps = state => {
   return {
-    char: state.characters
+    char: state.characters,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     requestCharacters: () => {
-      charApi.getCharacters(requestProps).then((data) => {
+      return charApi.getCharacters(requestProps).then((data) => {
         dispatch({type: actionTypes.GET_CHARACTERS, data: data.data.results})
       })
     },
@@ -28,16 +28,20 @@ const mapDispatchToProps = dispatch => {
 class CharactersList extends Component {
   state = {
     comicsData: [],
+    isButtonLoading: false,
   }
 
   componentDidMount() {
-    return this.props.char.length ? null : this.props.requestCharacters()
+    return this.props.char.length
+      ? null
+      : this.props.requestCharacters()
   }
 
   render() {
     const incrementLimit = () => {
+      this.setState(() => { return { isButtonLoading: true }})
       requestProps.limit = requestProps.limit + 20
-      this.props.requestCharacters()
+      this.props.requestCharacters().then(() => { this.setState(() => { return { isButtonLoading: false }}) })
     }
 
     const characters = () => {
@@ -51,7 +55,7 @@ class CharactersList extends Component {
         ? <div>
             <div className="characters-container">{ characters() }</div>
             <div onClick={ incrementLimit }>
-              <ShowMore />
+              <ShowMore loading={this.state.isButtonLoading}/>
             </div>
          </div>
         : 'loding'

@@ -6,6 +6,8 @@
   background-color: #00111c;
   &__button {
     padding: 15px 30px;
+    min-width: 150px;
+    text-align: center;
     background-color: #f0141e;
     color: #fff;
     font-size: 18px;
@@ -17,5 +19,20 @@
       transition: .2s;
       background-color: #b6141d;
     }
+  }
+  &__loading {
+    animation: loading 1s ease-in-out infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
