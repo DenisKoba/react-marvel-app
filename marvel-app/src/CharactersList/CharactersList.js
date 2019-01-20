@@ -1,42 +1,61 @@
 import React, { Component } from 'react'
-import ComicsComponent from '../CharactersComponent/CharactersComponent'
+import CharacterComponent from '../CharactersComponent/CharactersComponent'
+import ShowMore from '../ShowMore/ShowMore'
 import { connect } from 'react-redux';
 import * as actionTypes from '../store/actions';
 import charApi from '../api/characters-api'
 
+const requestProps = {
+  limit: 50
+}
+
 const mapStateToProps = state => {
   return {
     char: state.characters
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestCharacters: (name, age) => {
-      charApi.getCharacters().then((data) => {
+    requestCharacters: () => {
+      charApi.getCharacters(requestProps).then((data) => {
         dispatch({type: actionTypes.GET_CHARACTERS, data: data.data.results})
       })
     },
   }
-};
+}
 
 class CharactersList extends Component {
   state = {
-    comicsData: []
+    comicsData: [],
   }
 
   componentDidMount() {
-    this.props.requestCharacters()
+    return this.props.char.length ? null : this.props.requestCharacters()
   }
 
   render() {
+    const incrementLimit = () => {
+      requestProps.limit = requestProps.limit + 20
+      this.props.requestCharacters()
+    }
+
     const characters = () => {
-      return this.props.characters.map(character => {
-        return <ComicsComponent data={character}/>
+      return this.props.char.map(character => {
+        return <CharacterComponent key={character.id} data={character}/>
       })
     }
 
-    return this.props.characters ? <div className="characters-container">{ characters }</div> : 'loding'
+    return (
+      this.props.char
+        ? <div>
+            <div className="characters-container">{ characters() }</div>
+            <div onClick={ incrementLimit }>
+              <ShowMore />
+            </div>
+         </div>
+        : 'loding'
+    )
   }
 }
 

@@ -6,3 +6,16 @@
   grid-gap: 50px;
   padding: 50px 0;
 }
+
+.marvel-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0141e;
+  height: fit-content;
+}
+
+.marvel-logo {
+  width: 150px;
+  height: 80px;
+}

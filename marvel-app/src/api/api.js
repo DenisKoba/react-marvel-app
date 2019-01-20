@@ -13,7 +13,8 @@ function defaultHandler(resp) {
 }
 
 export default {
-  get(url) {
-    return axios.get(`${BASE_URL}${url}?limit=50&apikey=${KEY}`).then(defaultHandler)
+  get(url, props) {
+    props.apikey = KEY
+    return axios.get(BASE_URL + url, { params: props }).then(defaultHandler)
   },
 }

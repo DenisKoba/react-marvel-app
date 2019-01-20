@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ComicsComponent = (props) => {
-  return <Link to={`/${props.data.id}`} key={props.data.id}>
+const CharacterComponent = (props) => {
+  return <Link className="char-component" to={`/character/${props.data.id}`} key={props.data.id}>
     <div className="hero-img-container">
       <div className="hero-img-container__wrap">
         <img className="hero-img-container__img" src={`${props.data.thumbnail.path}.jpg`} />
@@ -15,4 +15,4 @@ const ComicsComponent = (props) => {
   </Link>
 }
 
-export default ComicsComponent
+export default CharacterComponent
