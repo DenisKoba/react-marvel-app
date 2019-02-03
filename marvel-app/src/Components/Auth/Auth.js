@@ -101,14 +101,13 @@ class Auth extends Component {
     const resolveEmail = (e) => {
       const target = e.currentTarget
       this.setState(() => { return { email: target.value }})
-      email = this.state.email
-      localStorage.setItem('userEmail', this.state.email)
+      return email = target.value
     }
 
     const resolvePassword = (e) => {
       const target = e.currentTarget
       this.setState(() => { return { password: target.value }})
-      return password = this.state.password
+      return password = target.value
     }
 
     const removeError = () => {
@@ -159,7 +158,7 @@ class Auth extends Component {
         <div className="login-container">
           <div className="login-container__form">
             <input className="login-container__input js-input" placeholder='email' onInput={ resolveEmail } onClick={removeError}/>
-            <input className="login-container__input js-input" placeholder='password' onInput={ resolvePassword } onClick={removeError}/>
+            <input className="login-container__input js-input" placeholder='password' onInput={ resolvePassword } onClick={removeError} type="password"/>
             { resolveState() }
             <div className="error-container">{ this.state.errorText } </div>
           </div>

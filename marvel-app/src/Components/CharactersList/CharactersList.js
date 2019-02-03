@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CharacterComponent from '../CharactersComponent/CharactersComponent'
 import ShowMore from '../ShowMore/ShowMore'
+import Preloader from '../Preloader/Preloader'
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 import charApi from '../../api/characters-api'
@@ -55,14 +56,14 @@ class CharactersList extends Component {
     }
 
     return (
-      this.props.char
+      this.props.char.length
         ? <div>
             <div className="characters-container">{ characters() }</div>
             <div onClick={ incrementLimit }>
               <ShowMore loading={this.state.isButtonLoading}/>
             </div>
          </div>
-        : 'loding'
+        : <Preloader/>
     )
   }
 }

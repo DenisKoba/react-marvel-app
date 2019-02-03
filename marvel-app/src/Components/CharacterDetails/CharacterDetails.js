@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ComicsComponent from '../ComicsComponent/ComicsComponent'
 import charApi from '../../api/characters-api'
+import Preloader from '../Preloader/Preloader'
 
 const mapStateToProps = state => {
   return {
@@ -15,7 +16,8 @@ class CharacterDetails extends Component {
     charComics: [],
     requestProps : {
       limit: 10
-    }
+    },
+    isLoading: false,
   }
 
   componentDidMount() {
@@ -32,10 +34,14 @@ class CharacterDetails extends Component {
     }
 
     const getComics = () => {
-
-      return charApi.getCharComics(this.props.match.params.id, this.state.requestProps).then((data) => {
-        return this.setState(() => { return { charComics: data.data.results }})
+      this.setState(() => { return { isLoading: true }})
+      return charApi.getCharComics(this.props.match.params.id, this.state.requestProps)
+        .then((data) => {
+        return this.setState(() => { return { charComics: data.data.results, isLoading: false }})
       })
+        .finally(() => {
+          this.setState(() => { return { isLoading: false }})
+        })
     }
 
     getComics()
@@ -43,6 +49,10 @@ class CharacterDetails extends Component {
   }
 
   render() {
+    const resolvePreloader = () => {
+      return this.state.isLoading ? <Preloader /> : false
+    }
+
     const renderCharComics = () => {
       if (this.state.charComics) {
         return this.state.charComics.map((el) => {
@@ -63,6 +73,7 @@ class CharacterDetails extends Component {
           </div>
         </div>
         <div className='comics-component'>{ renderCharComics() }</div>
+        { resolvePreloader() }
       </div>
     }
     return this.state.characterData.name ? characterDetails() : <div className='loading'>loading...</div>
