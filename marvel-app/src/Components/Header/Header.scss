@@ -1,4 +1,10 @@
-@import "./BackButton/BackButton.scss";
+@import "BackButton/BackButton";
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 2000;
+}
 
 .marvel-logo-container {
   display: flex;
@@ -43,4 +49,19 @@
 .marvel-logo {
   width: 150px;
   height: 80px;
+}
+
+.logout {
+  right: 0;
+  position: absolute;
+  margin: 0 20px 0 0;
+  padding: 5px 10px 8px;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s;
+  &:hover {
+    transition: .2s;
+    background: rgba(255, 255, 255, 0.32);
+  }
 }

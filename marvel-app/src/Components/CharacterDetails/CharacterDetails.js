@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ComicsComponent from '../ComicsComponent/ComicsComponent'
-import charApi from '../api/characters-api'
+import charApi from '../../api/characters-api'
 
 const mapStateToProps = state => {
   return {

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import CharacterComponent from '../CharactersComponent/CharactersComponent'
 import ShowMore from '../ShowMore/ShowMore'
 import { connect } from 'react-redux';
-import * as actionTypes from '../store/actions';
-import charApi from '../api/characters-api'
+import * as actionTypes from '../../store/actions';
+import charApi from '../../api/characters-api'
+import JSCookie from 'js-cookie'
 
 const requestProps = {
   limit: 50
@@ -32,9 +33,12 @@ class CharactersList extends Component {
   }
 
   componentDidMount() {
-    return this.props.char.length
-      ? null
-      : this.props.requestCharacters()
+    if (JSCookie.get('success')) {
+      return this.props.char.length
+        ? null
+        : this.props.requestCharacters()
+    }
+    return this.props.history.push('/login')
   }
 
   render() {
