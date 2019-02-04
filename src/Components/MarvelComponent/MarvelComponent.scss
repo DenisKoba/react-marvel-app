@@ -1,0 +1,22 @@
+.characters-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  max-width: 1000px;
+  margin: auto;
+  grid-gap: 50px;
+  padding: 185px 0;
+  min-height: 100vh;
+}
+
+.marvel-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0141e;
+  height: fit-content;
+}
+
+.marvel-logo {
+  width: 150px;
+  height: 80px;
+}

@@ -1,0 +1,67 @@
+@import "BackButton/BackButton";
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 2000;
+}
+
+.marvel-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0141e;
+  height: fit-content;
+}
+
+.marvel-navbar-container {
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.marvel-navbar-link {
+  padding: 10px 15px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 900;
+  color: #f0141e;
+  transition: .2s;
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+
+.go-back {
+  transition: .2s;
+  position: absolute;
+  left: 0;
+  &:hover {
+    background-color: #f0141e;
+    color: #fff;
+    transition: .2s;
+  }
+}
+
+.marvel-logo {
+  width: 150px;
+  height: 80px;
+}
+
+.logout {
+  right: 0;
+  position: absolute;
+  margin: 0 20px 0 0;
+  padding: 5px 10px 8px;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s;
+  &:hover {
+    transition: .2s;
+    background: rgba(255, 255, 255, 0.32);
+  }
+}
