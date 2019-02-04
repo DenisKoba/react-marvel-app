@@ -39,7 +39,7 @@ class CharactersList extends Component {
         ? null
         : this.props.requestCharacters()
     }
-    return this.props.history.push('/login')
+    return this.props.history.push('/react-marvel-app/login')
   }
 
   render() {
