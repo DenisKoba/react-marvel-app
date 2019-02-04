@@ -7,10 +7,10 @@ import Auth from '../Auth/Auth'
 
 const MarvelComponent = (props) => {
   return <div>
-    <Route path='/react-marvel-app/login' component={ Auth }/>
-    <Route path='/react-marvel-app/' component={ Header }/>
-    <Route path='/react-marvel-app/' exact  component={ CharactersList }/>
-    <Route path='react-marvel-app//character/:id' component={ CharacterDetails }/>
+    <Route path='/login' component={ Auth }/>
+    <Route path='/' component={ Header }/>
+    <Route path='/' exact  component={ CharactersList }/>
+    <Route path='/character/:id' component={ CharacterDetails }/>
   </div>
 }
 
