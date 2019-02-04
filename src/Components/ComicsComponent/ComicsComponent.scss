@@ -1,0 +1,37 @@
+.comics-component {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 1000px;
+  margin: auto;
+  grid-gap: 50px;
+  padding: 50px 0;
+}
+
+.comics-wrapper {
+  max-width: 200px;
+  box-sizing: border-box;
+  margin: 0 10px;
+  &__descr {
+    color: #fff;
+    font-size: 14px;
+  }
+  &__show-more {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__container {
+    max-width: 200px;
+  }
+}
+
+.comics-wrapper__img {
+  max-width: 200px;
+  transition: .3s;
+  &:hover {
+    transition: .3s;
+    transform: scale(1.05);
+  }
+}
